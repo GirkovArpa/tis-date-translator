@@ -1,0 +1,24 @@
+function buildDictionary(langFrom, langTo) {
+  const getMonth = (calendar) => calendar.$(caption).text.replace(/\d/g, "");
+  const getMonths = (calendar) => {
+    const months = [];
+    for (var i = 1; i < 13; i++) {
+      calendar.value = String.$(2021-{i}-01);
+      const month = getMonth(calendar);
+      months.push(month);
+    }
+    return months;
+  }
+  const getDays = (calendar) => calendar.$$(.weekday).map(|el|el.text);
+  const getMonthAndDays = (calendar) => getMonths(calendar).concat(...getDays(calendar));
+  const calendar = $(body).$append(<input|calendar value="2021-01-01" lang="{langFrom}" />);
+  const from = getMonthAndDays(calendar);
+  calendar.@["lang"] = langTo;
+  const to = getMonthAndDays(calendar);
+  calendar.remove();
+  return Object.assign(...from.map((k, i) => ({[k]: to[i]})));
+}
+
+const dict = buildDictionary("en-GB", "nl"); // English => Dutch
+$(textarea).value = JSON.stringify(dict);
+
